@@ -1,0 +1,48 @@
+<%layout("./layouts/bp.ejs")%>
+<body>
+   
+        <div class="order-detail-card">
+        
+            <div >
+                <h2>Order Details</h2>
+                    <p><b>Order </b><%=order._id%></p>
+                    <p><b>Placed on</b>  <%= order.createdAt.toLocaleString() %></p>
+                    <p ><b>Status : </b> <i><%= order.status %></i>
+                        <span <% if(order.status==="pending") {%>class="badge text-warning"<%}else if(order.status==="preparing"){%>class="badge text-primary"<%}else{%>class="badge text-success"<%}%>><i class="fa-solid fa-circle"></i></span>
+                    </p>
+             </div>
+      <hr>
+             <div>
+                <h3>Items : </h3>
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <%order.items.forEach(item=>{%>
+                            <tr>
+                               <td><%=item.name%></td>
+                               <td><%=item.price%></td>
+                               <td><%=item.quantity%></td>
+                               <td><%=item.price*item.quantity%></td>
+                            </tr>
+                       <%})%>
+                    </tbody>
+                   
+                </table>
+                <hr>
+                <p><b>Total : &#8377;</b> <%= order.total %></p>
+                <hr>
+             </div><br>
+             <a href="/orders"><button><i class="fa-solid fa-arrow-left"></i>Back to orders</button></a>
+          </div>
+          
+   
+   
+</body>

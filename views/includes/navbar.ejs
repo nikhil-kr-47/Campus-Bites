@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm bg-body-tertiary">
+    <div class="container-fluid">
+      <h1 class="nav-brand" >CampusBites</h1>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- <span class="navbar-toggler-icon"></span> -->
+        <i class="fa-solid fa-circle-user" id="profile-icon"></i>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="ms-auto">
+            <ul class="navbar-nav">
+              <%if(!isLoggedIn){%>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/user/login">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/user/signup">Signup</a>
+               </li>
+               <%}else{%>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Logout</a>
+               </li>
+               <%if(adminCheck!=="admin"){%>
+               <li class="nav-item">
+                <a class="nav-link" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+               </li>
+               <li class="nav-item">
+                <a class="nav-link" href="/orders">My Orders</a>
+               </li>
+              <%}else{%>
+                <li class="nav-item">
+                  <a class="nav-link" href="/menu">Manage Menu</a>
+                 </li>
+                <%}%>
+               
+                <%}%>
+              </ul>
+              
+        </div>
+       
+      </div>
+     
+      
+    </div>
+  </nav>

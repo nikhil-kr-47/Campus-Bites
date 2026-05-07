@@ -1,0 +1,23 @@
+<%layout("./layouts/bp.ejs")%>
+<body>
+    <div class="edit-menu-item-form"></div>
+    <form method="POST" action="/menu/<%= item._id %>/item" class="needs-validation col-8 offset-2" style="width:100%;" novalidate>
+        <h1>Edit Item</h1><br>
+         <div>
+            <label for="name" class="form-label" style="font-size: larger;">Name</label>
+            <input type="text" id="name" name="name" class="form-control" value="<%= item.name %>" required>
+            <div class="invalid-feedback">
+                Can't be empty!
+            </div>
+         </div>
+
+         <div>
+            <label for="price" class="form-label" style="font-size: larger;">Price</label>
+            <input type="number" id="price" name="price" class="form-control" value="<%= item.price %>" required>
+            <div class="invalid-feedback">
+                Can't be empty!
+            </div>
+         </div><br>
+         <button>Edit</button>
+    </form>
+</body>

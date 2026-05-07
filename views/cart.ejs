@@ -1,0 +1,42 @@
+<% layout("./layouts/bp.ejs") %>
+<body>
+    <h2>Your cart</h2>
+    <div class="cart" >
+      <%for(let item of cart){%>
+       <div class="card" style="width: 100vw !important;">
+        <div class="card-left">
+          <img src="<%= item.image %>">
+          <div>
+            <h5><%= item.name %></h5>
+            <p>&#8377;<%= item.price %></p>
+          </div>
+        </div>
+        <div class="card-right">
+          <div>
+            <form method="POST" action="/cart/<%= item.id %>/action">
+              <button name="action" value="decrease">-</button>
+              <%= item.quantity %>
+              <button name="action" value="increase">+</button>
+              <button class="cart-remove-btn" name="action" value="remove">Remove</button>
+           </form>
+          </div>
+         
+        </div>
+       </div>
+       
+       <%}%>
+       <div class="total-order-div mt-3">
+        <b>Total : <%
+          let total=0;
+         total=cart.reduce((res,item)=>{
+          return res+(item.quantity*item.price);
+         },0)
+        %> &#8377;<%= total %></b>
+        <form method="POST" action="/cart/placeOrder">
+          <button id="order-place-btn">Place Order</button>
+        </form>
+        
+       </div>
+       
+     </div>
+</body>

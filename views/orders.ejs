@@ -1,0 +1,17 @@
+<%layout("./layouts/bp.ejs")%>
+<body>
+    <h3>Your Orders</h3>
+    <%for(let order of orders){%>
+        
+            <div class="orders-card" >
+                <div class="card-body">
+                  <p class="card-title"><b>Order Id :</b> <i><%=order._id%></i></p>
+                  <p>Total : <%= order.total %></p>
+                  <p><%= order.createdAt.toLocaleString() %></p>
+                 <a href="/orders/<%= order._id %>"><button>View Details</button></a>
+                </div>
+              </div>
+     
+        
+    <%}%>
+</body>

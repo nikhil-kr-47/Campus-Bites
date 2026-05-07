@@ -1,0 +1,17 @@
+<%layout("./layouts/bp.ejs")%>
+<body>
+    <h1>Items</h1><br>
+    <div style="width: 100vw; " >
+      <div class="card col-8 offset-2 admin-order-card" >
+        
+        <ol class="list-group list-group-flush">
+          <%for(let item of order.items){%>
+              <li><b><%= item.name %></b>&nbsp;&nbsp;&nbsp; X <%= item.quantity %></li>
+        <%}%>
+        </ol>
+      
+      </div>
+    </div>
+   <br>
+      <a href="/admin/orders"><button><i class="fa-solid fa-arrow-left"></i>Back to orders</button></a>
+</body>

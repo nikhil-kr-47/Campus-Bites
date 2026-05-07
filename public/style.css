@@ -1,0 +1,303 @@
+body{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+    
+}
+.navbar-collapse{
+    /* display: flex !important; */
+    margin-right: 2rem;
+}
+
+.nav-brand{
+    font-size: 2rem !important;
+    margin-left: 2rem;
+    color: rgb(148, 125, 12);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+
+
+.navbar{
+    background-color: rgb(26, 15, 77) !important;
+    padding: 1rem;
+   position: fixed;
+   top: 0;
+   width: 100%;
+   z-index: 2;
+}
+
+#navbarNav li {
+   border: 1px solid white;
+   margin-right: 1rem;
+   background-color: rgb(148, 125, 12);
+   border-radius: 1rem;
+   padding: 0rem 1rem;
+   color:  rgb(26, 15, 77) ;
+}
+
+button{
+    background-color: rgb(148, 125, 12);
+    padding: 0.5rem 1.2rem;
+    border: 1px solid white;
+    border-radius: 1rem;
+    color: white;
+}
+
+button:hover{
+    background-color: rgb(122, 103, 9);
+}
+
+.navbar-toggler-icon{
+   background-color: rgb(148, 125, 12);
+   
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 2rem;
+    justify-content: space-evenly;
+  
+}
+
+.tagline h2,h4{
+    color: rgb(26, 15, 77) ;
+    font-weight: bolder;
+}
+
+.tagline h4{
+    opacity: 0.8;
+}
+
+.start-btn{
+    background-color: green;
+    color: white;
+    border-radius: 1rem;
+    padding: 0.5rem 4rem;
+    border: 1px solid green;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+.start-btn:hover{
+   background-color:darkgreen;
+}
+
+.features{
+    display: flex;
+    margin-top: 2rem;
+    width: 70%;
+    justify-content: space-evenly;
+   width: auto;
+}
+
+.features i{
+    font-size: 4rem;
+    color: rgb(148, 125, 12);
+   
+}
+ 
+.features div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+   padding: 0 1rem;
+   
+}
+
+.feature-name{
+    font-size: larger;
+}
+
+
+@media(max-width:1000px){
+    .features{
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .login-form,.signup-form,.add-menu-form,main,.edit-menu-item-form,.admin-order-card{
+        font-size: 22px;
+    }
+
+    .login-form h1,.signup-form h1,.add-menu-form h1,.edit-menu-item-form h1,.admin-order-card h1{
+        font-size: 35px;
+    }
+
+    .hide-mob{
+        display: none;
+    }
+}
+
+
+
+a{
+    text-decoration: none;
+}
+
+.main-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    margin-top: 2rem;
+}
+
+.login-container,.signup-container,.add-menu-form{
+   width: 100vw ;
+   
+}
+
+
+
+.menu{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
+}
+
+.menu-card{
+    height: 30rem;
+    width: 30rem;
+}
+
+.menu-card img{
+    height: 18rem;
+    border-radius: 1rem;
+}
+
+.cart img{
+    height: 4rem;
+    width: 6rem;
+    margin-right: 1rem;
+}
+
+.card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 1rem;
+}
+
+.card-left , .card-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-remove-btn{
+    background-color: red;
+    color: white;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.cart-remove-btn:hover{
+   background-color: rgb(209, 23, 23);
+}
+
+.total-order-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border:0.5px solid rgb(171, 169, 169);
+    padding: 1rem 1rem;
+    border-radius: 1rem;
+}
+
+.orders-card{
+    box-shadow: 2px 2px 10px black;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.orders-card:hover{
+    cursor: pointer;
+}
+
+a{
+   color: black;
+}
+
+.order-detail-card{
+   box-shadow: 1px 1px 10px grey;
+   padding: 1rem;
+}
+
+
+
+.order-table td, th{
+   border: 1px dashed grey;
+   padding: 1rem;
+}
+
+#profile-icon{
+    color: grey;
+    font-size: 2.5rem;
+}
+
+.counts{
+    display: flex;
+    width: 90%;
+    gap: 1rem;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.counts >div{
+   box-shadow: 1px 1px 10px grey;
+  
+   border-radius: 1rem;
+   flex-grow: 1;
+   padding: 1rem 1rem;
+   display: flex;
+   align-items: center;
+   gap: 2rem;
+}
+
+.counts i{
+    font-size: 3rem;
+}
+
+.admin-order-table{
+    width: 90%;
+    
+}
+
+.admin-order-table tr, th{
+   border: 0.5px solid grey;
+  
+}
+
+.admin-order-table td{
+    padding: 1rem 1rem;
+    border: 0.5px solid grey;
+   
+}
+
+#go-to-cart-btn{
+    position: fixed;
+    bottom: 2rem;
+    background-color: blue;
+    padding: 1rem 3rem;
+   box-shadow: 2px 2px 10px black;
+   left: 50%;
+   transform: translateX(-50%);
+}
+
+.admin-order-card{
+    padding-left: 2rem;
+}
+
+

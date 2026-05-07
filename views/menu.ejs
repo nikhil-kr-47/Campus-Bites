@@ -1,0 +1,39 @@
+<% layout("./layouts/bp.ejs") %>
+<body>
+   <h2 class="mt-5">Menu</h2><br>
+    <div class="menu ">
+       <%for(let data of menuData){%>
+        <div class="menu-card mb-2" style="width: 22rem;">
+            <img src="<%= data.image %>" class="card-img-top" <%if(!data.available){%>style="opacity:0.4;"<%}%> alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%=data.name%></h5>
+              <p class="card-text">&#8377;<%= data.price %></p>
+              <%if(adminCheck!=="admin"){%>
+                <%if(data.available){%>
+                <form method="POST" action="/cart/add/<%= data._id %>">
+                  <button  >Add to Cart</button>
+                </form>
+                <%}else{%>
+                      <b style="color: red;">Out of stock</b>
+                  <%}%>
+              <%}else{%>
+                <form method="POST" action="/menu/<%= data._id %>/update?_method=PATCH">
+                  <button><%if(data.available){%>Mark out of stock<%}else{%>Mark available<%}%></button>
+                </form>
+                <a href="/menu/<%= data._id %>/item"><button style="background-color: brown;">Edit</button></a>
+                <%}%>
+             
+              
+            </div>
+          </div>
+          <%}%>
+          
+          
+         
+    </div>
+    <div>
+      <%if(cart && cart.length){%>
+        <a href="/cart"><button id="go-to-cart-btn"><i class="fa-solid fa-arrow-right-long"></i> Go to cart</button></a>
+     <%}%>
+    </div>
+</body>

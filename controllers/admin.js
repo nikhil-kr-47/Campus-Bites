@@ -9,14 +9,14 @@ module.exports.adminOrders=async(req,res,next)=>{
     else  readyCnt++;
     
    }
-    res.render("admin",{orders,pendingCnt,prepCnt,readyCnt});
-    // res.send("Hello");
+   return res.render("admin",{orders,pendingCnt,prepCnt,readyCnt});
+    
 }
 
 module.exports.adminAction=async(req,res,next)=>{
     
    let id=req.params.id;
    await Order.findByIdAndUpdate(id,{$set:{status:req.body.status}});
-   res.redirect("/admin/orders");
+  return res.redirect("/admin/orders");
 }
 

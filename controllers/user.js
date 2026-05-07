@@ -1,11 +1,11 @@
 const User=require("../models/user");
 
 module.exports.getUserLogin=(req,res)=>{
-    res.render("login.ejs");
+    return res.render("login.ejs");
 }
 
 module.exports.getUserSignup=(req,res)=>{
-    res.render("signup.ejs");
+    return res.render("signup.ejs");
 }
 
 module.exports.postUserSignup=async(req,res,next)=>{
@@ -29,7 +29,7 @@ module.exports.postUserLogin=async(req,res,next)=>{
     req.flash("success","Logged in successfully");
     if(req.user.role==="user") return res.redirect("/menu");
    
-    res.redirect("/admin/orders"); 
+    return res.redirect("/admin/orders"); 
     
 }
 

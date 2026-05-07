@@ -12,7 +12,7 @@ module.exports.cartAdd=async(req,res,next)=>{
             quantity:1
         });
     }
-    res.redirect("/menu");
+    return res.redirect("/menu");
 }
 
 module.exports.getCart=async(req,res)=>{
@@ -36,7 +36,7 @@ module.exports.getCart=async(req,res)=>{
        
      });
    
-    res.render("cart",{cart:cartItems});
+    return res.render("cart",{cart:cartItems});
 }
 
 module.exports.cartAction=async(req,res,next)=>{
@@ -53,7 +53,7 @@ module.exports.cartAction=async(req,res,next)=>{
         req.session.cart=req.session.cart.filter((prod)=>prod.id!=item.id);
     }
    
-    res.redirect("/cart");
+   return res.redirect("/cart");
 }
 
 module.exports.placeOrder=async(req,res,next)=>{
@@ -95,5 +95,5 @@ module.exports.placeOrder=async(req,res,next)=>{
     }
     
    req.session.cart=[];
-   res.redirect("/menu");
+  return res.redirect("/menu");
 }

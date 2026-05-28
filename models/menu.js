@@ -10,8 +10,14 @@ const menuSchema=mongoose.Schema({
         required:true
     },
     image:{
+       url:{
+           type:String,
+           required:true
+       },
+       public_id:{
         type:String,
-        default:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVagGwiThgq7ncziWAtfISHSbaZ1gaknf-qw&s"
+        required:true
+       }
     },
     available:{
        type: Boolean,

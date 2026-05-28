@@ -2,7 +2,7 @@
 <body>
    
        <div class="add-menu-form"></div>
-        <form method="POST" action="/menu/add" class="needs-validation col-8 offset-2" novalidate>
+        <form method="POST" action="/menu/add" class="needs-validation col-8 offset-2" novalidate enctype="multipart/form-data">
             <h1>Add Item</h1><br>
             <div >
                 <label for="name" class="form-label" style="font-size: larger;">Name</label>
@@ -19,6 +19,13 @@
                     Please enter price!
                 </div>
             </div><br>
+            <div>
+                <label for="image" class="form-label" style="font-size: larger;">Upload Image</label>
+                <input type="file" accept="image/*" id="image" name="image" class="form-control" required>
+                <div class="invalid-feedback">
+                    Please upload valid image!
+                </div><br>
+            </div>
             <button>Add</button>
         </form>
     

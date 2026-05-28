@@ -18,6 +18,22 @@ const userSchema=mongoose.Schema({
         type:String,
         enum:["admin","user"],
         default:"user"
+    },
+    resetToken:{
+        type:String
+    },
+    tokenExpiry:{
+        type:Date
+    },
+    otp:{
+        type:String
+    },
+    otpExpiry:{
+        type:Date
+    },
+    isVerified:{
+        type:Boolean,
+        default:false
     }
 });
 userSchema.plugin(passportLocalMongoose);

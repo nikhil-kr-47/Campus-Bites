@@ -4,7 +4,7 @@ const router=express.Router({mergeParams:true});
 const passport=require("passport");
 const {userValidate}=require("../middlewares/joiValidate");
 
-const {getUserLogin,getUserSignup,postUserLogin,postUserSignup}=require("../controllers/user");
+const {getUserLogin,getUserSignup,postUserLogin,postUserSignup,getResetPassword,postResetPassword,getSetNewPassword,postSetNewPassword,signupVerify}=require("../controllers/user");
 
 router.route("/login")
 .get(getUserLogin)
@@ -13,5 +13,16 @@ router.route("/login")
 router.route("/signup")
 .get(getUserSignup)
 .post(userValidate,wrapAsync(postUserSignup));
+
+router.route("/resetPassword")
+.get(getResetPassword)
+.post(wrapAsync(postResetPassword));
+
+router.route("/setNewPassword")
+.get(getSetNewPassword)
+.post(wrapAsync(postSetNewPassword));
+
+router.route("/signup/otpVerify")
+.post(wrapAsync(signupVerify));
 
 module.exports=router;

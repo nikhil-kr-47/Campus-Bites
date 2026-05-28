@@ -35,14 +35,14 @@ app.use(session({
     resave:false,
     saveUninitialized:true,
     secret:"jbhjjhdscjhvvs",
-    store: MongoStore.create({
-        mongoUrl:process.env.DB_URL,
-        crypto:{
-           secret: process.env.SESION_SECRET
-        },
-        touchAfter:24*3600
+    // store: MongoStore.create({
+    //     mongoUrl:process.env.DB_URL,
+    //     crypto:{
+    //        secret: process.env.SESION_SECRET
+    //     },
+    //     touchAfter:24*3600
 
-    }),
+    // }),
     cookie:{
         maxAge:7*24*60*60*1000,
         httpOnly:true,
@@ -57,10 +57,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 async function main(){
-    await mongoose.connect(process.env.DB_URL);
+    await mongoose.connect("mongodb://127.0.0.1:27017/CampusBites");
 }
 
-main().then(()=>{console.log("Connected to Atlas")}).catch(err=>console.log(err));
+main().then(()=>{console.log("Connected to DB")}).catch(err=>console.log(err));
 
 
 const port=8080;

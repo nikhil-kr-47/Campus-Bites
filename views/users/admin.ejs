@@ -1,0 +1,102 @@
+<%layout("./layouts/bp.ejs")%>
+<body>
+    <a href="/menu/add"><button style="font-size: 1.5rem;">+ Add new item to Menu </button></a><br>
+    <h4>Manage and update all customer orders</h4><br>
+    <div class="counts ">
+        <div class="pending-div" style="color: rgb(155, 155, 51);">
+            <i class="fa-regular fa-clock"></i>
+            <div><p>Pending</p><b><%= pendingCnt %></b></div>
+        </div>
+
+        <div class="prep-div" style="color: blue;">
+            <i class="fa-solid fa-mortar-pestle"></i>
+            <div><p>Preparing</p><b><%= prepCnt %></b></div>
+        </div>
+
+        <div class="ready-div"  style="color: green;">
+            <i class="fa-regular fa-circle-check"></i>
+            <div><p>Ready</p><b><%= readyCnt %></b></div>
+        </div>
+    </div>
+    <hr>
+   
+    <div class="order-type-btns">
+        <button id="show-queue-orders" type="button" class="btn btn-primary btn-lg">Queue Orders</button>
+        <button id="show-hostel-orders" type="button" class="btn btn-primary btn-lg">Hostel Orders</button>
+        <button id="show-slot-orders" type="button" class="btn btn-primary btn-lg">Slot Orders</button>
+    </div>
+
+    <br>
+    
+    <div >
+        <table class="admin-order-table hostel-order-table" style="width: 100%; margin:1rem 1rem; ">
+            <caption style="caption-side: top; font-size:larger">Hostel Orders</caption>
+            <%-include("../includes/orderTable.ejs")%>
+            <tbody>
+                <%for(let order of orders){
+                    if(order.deliveryMode==="hostel"){%>
+                  <tr>
+                    <td class="hide-mob"><%= order.orderNumber %></td>
+                    <td><%= order.userId.username %><br>+91<%= order.userId.phoneNo %></td>
+                    <td ><a href="/orders/<%= order._id %>/show"><button>Show order</button></a></td>
+                    <td class="hide-mob"><%= order.total %></td>
+                    <td class="hide-mob"><%= order.status %></td>
+                    <td class="hide-mob"><%= order.createdAt.toLocaleString() %></td>
+                    <td>
+                        <form method="POST" action="/admin/<%= order._id %>/update?_method=PATCH">
+                           <%-include("../includes/adminAction")%>
+                        </form>
+                     </td>
+                  </tr>
+                <%}}%>
+            </tbody>
+        </table>
+
+        <table class="admin-order-table queue-order-table" style="width: 100%; margin:1rem 1rem; display:none">
+            <caption style="caption-side: top; font-size:larger">Queue Orders</caption>
+            <%-include("../includes/orderTable.ejs")%>
+            <tbody>
+                <%for(let order of orders){
+                    if(order.deliveryMode==="cafe" && order.orderType==="queue"){%>
+                  <tr>
+                    <td class="hide-mob"><%= order.orderNumber %></td>
+                    <td><%= order.userId.username %><br>+91<%= order.userId.phoneNo %></td>
+                    <td ><a href="/orders/<%= order._id %>/show"><button>Show order</button></a></td>
+                    <td class="hide-mob"><%= order.total %></td>
+                    <td class="hide-mob"><%= order.status %></td>
+                    <td class="hide-mob"><%= order.createdAt.toLocaleString() %></td>
+                    <td>
+                        <form method="POST" action="/admin/<%= order._id %>/update?_method=PATCH">
+                            <%-include("../includes/adminAction")%>
+                         </form>
+                     </td>
+                  </tr>
+                <%}}%>
+            </tbody>
+        </table>
+
+        <table class="admin-order-table slot-order-table" style="width: 100%; margin:1rem 1rem; display:none">
+            <caption style="caption-side: top; font-size:larger">Slot Orders</caption>
+            <%-include("../includes/orderTable.ejs")%>
+            
+            <tbody>
+                <%for(let order of orders){
+                    if(order.deliveryMode==="cafe" && order.orderType==="slot"){%>
+                  <tr>
+                    <td class="hide-mob"><%= order.orderNumber %></td>
+                    <td><%= order.userId.username %><br>+91<%= order.userId.phoneNo %></td>
+                    <td ><a href="/orders/<%= order._id %>/show"><button>Show order</button></a></td>
+                    <td class="hide-mob"><%= order.total %></td>
+                    <td class="hide-mob"><%= order.status %></td>
+                    <td class="hide-mob"><%= order.createdAt.toLocaleString() %></td>
+                    <td>
+                        <form method="POST" action="/admin/<%= order._id %>/update?_method=PATCH">
+                            <%-include("../includes/adminAction")%>
+                         </form>
+                     </td>
+                  </tr>
+                <%}}%>
+            </tbody>
+        </table>
+     </div>
+</body>

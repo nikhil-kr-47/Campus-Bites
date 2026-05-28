@@ -18,9 +18,24 @@ const orderSchema=mongoose.Schema({
         enum:["pending","preparing","ready","delivered"],
         default:"pending"
     },
+    deliveryMode:{
+        type:String,
+        enum:["hostel","cafe"]
+    },
+    orderType:{
+        type:String,
+        enum:["queue","slot"]
+    },
+    slot:{
+        type:String
+    },
     createdAt:{
         type:Date,
-        default:Date.now
+        default:Date.now()
+    },
+    orderNumber:{
+        type:Number,
+        required:true
     }
 });
 

@@ -1,7 +1,7 @@
 const Order=require("../models/orders");
 
 module.exports.adminOrders=async(req,res,next)=>{
-    let orders=await Order.find({status:{$in:["pending","preparing","ready"]}}).populate("userId").sort({createdAt:-1});
+    let orders=await Order.find({status:{$in:["pending","preparing","ready"]}}).populate("userId");
     let pendingCnt=0,prepCnt=0,readyCnt=0;
    for(let order of orders){
     if(order.status==="pending") pendingCnt++;
@@ -9,7 +9,7 @@ module.exports.adminOrders=async(req,res,next)=>{
     else  readyCnt++;
     
    }
-   return res.render("admin",{orders,pendingCnt,prepCnt,readyCnt});
+   return res.render("users/admin",{orders,pendingCnt,prepCnt,readyCnt});
     
 }
 

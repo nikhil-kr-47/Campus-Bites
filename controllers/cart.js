@@ -1,5 +1,8 @@
 const Menu=require("../models/menu");
 const Order=require("../models/orders");
+const ExpressError=require("../utils/ExpressError");
+const genTimeSlots=require("../utils/timeSlots");
+const MAX_ORDERS_IN_SLOT=10;
 module.exports.cartAdd=async(req,res,next)=>{
     let id=req.params.id;
     if(!req.session.cart) req.session.cart=[];
@@ -18,7 +21,13 @@ module.exports.cartAdd=async(req,res,next)=>{
 module.exports.getCart=async(req,res)=>{
     const cart=req.session.cart || [];
      const ids=cart.map((item)=>item.id);
-     
+     let availableSlots=genTimeSlots();
+     let slots=[];
+     for(let slot of availableSlots){
+        let count=await Order.countDocuments({slot:slot,orderType:"slot"});
+        if(count<MAX_ORDERS_IN_SLOT) slots.push(slot);
+     }
+     slots=slots.filter(slot=>slot!=undefined);
      const allItems=await Menu.find({_id : {$in:ids}});
      const cartItems=allItems.map((item)=>{
        const anItem= cart.find((c)=>c.id===item._id.toString());
@@ -36,7 +45,7 @@ module.exports.getCart=async(req,res)=>{
        
      });
    
-    return res.render("cart",{cart:cartItems});
+    return res.render("cart/cart.ejs",{cart:cartItems,slots:slots});
 }
 
 module.exports.cartAction=async(req,res,next)=>{
@@ -72,21 +81,38 @@ module.exports.placeOrder=async(req,res,next)=>{
         return {
            name:item.name,
            price:item.price,
-           quantity:anItem.quantity
-
+           quantity:anItem.quantity,
         }
        }
+     });
+     if(req.body.orderType==="slot"){
+        let countInSLot=await Order.countDocuments({slot:req.body.slot,orderType:"slot"});
+     if(countInSLot>=MAX_ORDERS_IN_SLOT) return next(new ExpressError(404,"Slot fulfilled"));
+     }
      
-     
-       
-    });
     orders=orders.filter((order)=>order!=undefined);
     if(orders.length){
+
+        let today=new Date();
+        today.setHours(0,0,0,0);
+        let tomorrow=new Date(today);
+        tomorrow.setDate(today.getDate()+1);
+        let lastOrder=await Order.findOne({
+            createdAt:{$gte:today,$lt:tomorrow}
+        }).sort({orderNumber:-1});
+        let orderno=1;
+        if(lastOrder){
+            orderno=lastOrder.orderNumber+1;
+        }
+
         let userOrder=new Order({
             userId:req.user._id,
             items:orders,
-            total:total
-    
+            total:total,
+            deliveryMode:req.body.deliveryMode,
+            orderType:req.body.orderType,
+            slot:req.body.slot,
+            orderNumber:orderno
         });
        await userOrder.save();
        req.flash("success","Order placed successfully");

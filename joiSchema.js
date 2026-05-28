@@ -11,7 +11,10 @@ const menuSchema=joi.object({
     name:joi.string().required(),
        
      price:joi.number().required().min(1),
-       
+       image:joi.object({
+        url:joi.string().required(),
+        public_id:joi.string().required()
+       }).required()
      
         
 });
@@ -21,7 +24,10 @@ const orderSchema=joi.object({
     items:joi.array().items(joi.object({
         name:joi.string().required(),
         price:joi.number().required(),
-        quantity:joi.number().required().min(1)
+        quantity:joi.number().required().min(1),
+        deliveryMode:joi.string().required(),
+        ordertype:joi.string().required(),
+        orderNumber:joi.number().required()
     })).min(1).required(),
         
 

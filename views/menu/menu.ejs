@@ -4,7 +4,7 @@
     <div class="menu ">
        <%for(let data of menuData){%>
         <div class="menu-card mb-2" style="width: 22rem;">
-            <img src="<%= data.image %>" class="card-img-top" <%if(!data.available){%>style="opacity:0.4;"<%}%> alt="...">
+            <img src="<%= data.image.url %>" class="card-img-top" <%if(!data.available){%>style="opacity:0.4;"<%}%> alt="...">
             <div class="card-body">
               <h5 class="card-title"><%=data.name%></h5>
               <p class="card-text">&#8377;<%= data.price %></p>

@@ -118,26 +118,18 @@ main{
 
 
 @media(max-width:1000px){
-    .features{
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .login-form,.signup-form,.add-menu-form,main,.edit-menu-item-form,.admin-order-card{
-        font-size: 22px;
-    }
-
-    .login-form h1,.signup-form h1,.add-menu-form h1,.edit-menu-item-form h1,.admin-order-card h1{
-        font-size: 35px;
-    }
-
+  
     .hide-mob{
         display: none;
     }
 }
 
-
+@media(max-width:600px){
+    .counts div{
+       width: 100vw;
+       margin:0 3rem 0 3rem;
+    }
+}
 
 a{
     text-decoration: none;
@@ -212,8 +204,14 @@ a{
     justify-content: space-between;
     align-items: center;
     border:0.5px solid rgb(171, 169, 169);
-    padding: 1rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
     border-radius: 1rem;
+}
+
+.total-order-div form{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .orders-card{
@@ -276,13 +274,13 @@ a{
 }
 
 .admin-order-table tr, th{
-   border: 0.5px solid grey;
+   border: 1px solid grey;
   
 }
 
 .admin-order-table td{
     padding: 1rem 1rem;
-    border: 0.5px solid grey;
+    border: 1px solid grey;
    
 }
 
@@ -298,6 +296,17 @@ a{
 
 .admin-order-card{
     padding-left: 2rem;
+}
+
+.order-type-btns{
+    display: flex;
+    gap: 1rem;
+}
+
+@media(max-width:500px){
+    .order-type-btns {
+       flex-direction: column;
+    }
 }
 
 

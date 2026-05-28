@@ -1,0 +1,24 @@
+<%layout("./layouts/bp.ejs")%>
+<body>
+  
+        <div class="login-container">
+            <form method="POST" action="/user/signup/otpVerify" class="needs-validation" novalidate>
+                <h2 class="offset-2">Otp Verification</h2><br>
+                <div class="offset-2 col-8">
+                    <label for="otp" class="form-label" style="font-size: larger;">Enter OTP</label>
+                    <input type="text" class="form-control" id="otp" required name="otp" maxlength="4" minlength="4">
+                    <div class="invalid-feedback">
+                     Please enter valid 4-digit otp
+                    </div>
+                </div>
+                <br>
+                <div class="offset-2 col-8">
+
+                    <input type="hidden" class="form-control"  name="email" value="<%= email %>">
+                   
+                </div>
+                <button class="offset-2">Confirm</button>
+            </form>
+        </div>
+    
+</body>

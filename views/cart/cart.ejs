@@ -1,7 +1,7 @@
 <% layout("./layouts/bp.ejs") %>
 <body>
     <h2>Your cart</h2>
-    <div class="cart" >
+    <div class="cart" style="width: 100vw;">
       <%for(let item of cart){%>
        <div class="card" style="width: 100vw !important;">
         <div class="card-left">
@@ -33,6 +33,34 @@
          },0)
         %> &#8377;<%= total %></b>
         <form method="POST" action="/cart/placeOrder">
+         <div>
+          <label for="deliveryMode">Delivery Mode</label>
+          <select id="deliveryMode" name="deliveryMode">
+            <option value="hostel" >Hostel Delivery</option>
+            <option value="cafe" selected>Cafeteria Pickup</option>
+          </select>
+
+         </div>
+
+         <div class="order-type-div">
+          <label for="orderType">Order Type</label>
+          <select id="orderType" name="orderType">
+            <option value="queue" selected>Queue</option>
+            <option value="slot">Book Slot</option>
+          </select>
+          
+         </div>
+          <%if(slots.length){%>
+         <div class="slot-select-div" style="display: none;">
+          <label for="slot">Choose slot</label>
+          <select id="slot" name="slot">
+            <%for(let slot of slots){%>
+              <option value="<%= slot %>"><%= slot %></option>
+            <%}%>
+          </select>
+          
+         </div>
+         <%}%>
           <button id="order-place-btn">Place Order</button>
         </form>
         

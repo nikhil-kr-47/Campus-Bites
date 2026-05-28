@@ -57,7 +57,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 async function main(){
-    await mongoose.connect("mongodb://127.0.0.1:27017/CampusBites");
+    await mongoose.connect(process.env,DB_URL);
 }
 
 main().then(()=>{console.log("Connected to DB")}).catch(err=>console.log(err));

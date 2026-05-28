@@ -46,7 +46,9 @@
           <label for="orderType">Order Type</label>
           <select id="orderType" name="orderType">
             <option value="queue" selected>Queue</option>
+           <% if(slots.length){%>}
             <option value="slot">Book Slot</option>
+            <%}%>
           </select>
           
          </div>

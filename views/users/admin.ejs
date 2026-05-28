@@ -44,7 +44,7 @@
                     <td class="hide-mob"><%= order.createdAt.toLocaleString() %></td>
                     <td>
                         <form method="POST" action="/admin/<%= order._id %>/update?_method=PATCH">
-                           <%-include("../includes/adminAction")%>
+                           <%-include("../includes/adminAction",{order})%>
                         </form>
                      </td>
                   </tr>
@@ -67,7 +67,7 @@
                     <td class="hide-mob"><%= order.createdAt.toLocaleString() %></td>
                     <td>
                         <form method="POST" action="/admin/<%= order._id %>/update?_method=PATCH">
-                            <%-include("../includes/adminAction")%>
+                            <%-include("../includes/adminAction",{order})%>
                          </form>
                      </td>
                   </tr>
@@ -91,7 +91,7 @@
                     <td class="hide-mob"><%= order.createdAt.toLocaleString() %></td>
                     <td>
                         <form method="POST" action="/admin/<%= order._id %>/update?_method=PATCH">
-                            <%-include("../includes/adminAction")%>
+                            <%-include("../includes/adminAction",{order})%>
                          </form>
                      </td>
                   </tr>

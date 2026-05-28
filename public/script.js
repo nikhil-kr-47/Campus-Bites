@@ -86,5 +86,5 @@ confirmNewPassword.addEventListener("input",()=>{
   else passwordResetBtn=true;
 });
 
-  
+
 

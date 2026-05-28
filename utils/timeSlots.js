@@ -3,7 +3,7 @@ function genTimeSlots(){
     let min=now.getMinutes();
     let st=min>30 ? now.getHours()+1 : now.getHours(),end=20;
     let slots=[];
-    if(min<30){
+    if(now.getHours()<end && min<30){
           slots.push(`${st}:30 - ${st+1}:00`);
           st++;
     }

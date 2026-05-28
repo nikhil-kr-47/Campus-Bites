@@ -35,14 +35,14 @@ app.use(session({
     resave:false,
     saveUninitialized:true,
     secret:"jbhjjhdscjhvvs",
-    // store: MongoStore.create({
-    //     mongoUrl:process.env.DB_URL,
-    //     crypto:{
-    //        secret: process.env.SESION_SECRET
-    //     },
-    //     touchAfter:24*3600
+    store: MongoStore.create({
+        mongoUrl:process.env.DB_URL,
+        crypto:{
+           secret: process.env.SESION_SECRET
+        },
+        touchAfter:24*3600
 
-    // }),
+    }),
     cookie:{
         maxAge:7*24*60*60*1000,
         httpOnly:true,
@@ -65,7 +65,7 @@ main().then(()=>{console.log("Connected to DB")}).catch(err=>console.log(err));
 
 const port=8080;
 
-app.listen(port,()=>{
+app.listen(process.env.PORT || port,()=>{
     console.log("App is listening");
 });
 

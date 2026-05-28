@@ -57,7 +57,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 async function main(){
-    await mongoose.connect(process.env,DB_URL);
+    await mongoose.connect(process.env.DB_URL);
 }
 
 main().then(()=>{console.log("Connected to DB")}).catch(err=>console.log(err));

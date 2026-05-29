@@ -31,6 +31,21 @@ module.exports.postUserSignup=async(req,res,next)=>{
     });
   let user=await User.register(newUser,password);
 
+  transporter.verify((err,success)=>{
+
+    if(err){
+ 
+       console.log("MAIL ERROR");
+       console.log(err);
+ 
+    }else{
+ 
+       console.log("MAIL SERVER READY");
+ 
+    }
+ 
+ });
+
   const info = await transporter.sendMail({
     from:`"Campus Bites support"<${ process.env.SMTP_USER}>`,
     to: email,

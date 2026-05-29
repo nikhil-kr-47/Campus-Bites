@@ -1,14 +1,8 @@
 const User=require("../models/user");
 const crypto=require("crypto");
-const nodemailer=require("nodemailer");
+const { Resend } = require("resend");
 
-const transporter = nodemailer.createTransport({
-   service:"gmail",
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
+const resend =new Resend(process.env.RESEND_API_KEY);
 
 module.exports.getUserLogin=(req,res)=>{
     return res.render("users/login.ejs");
@@ -30,32 +24,20 @@ module.exports.postUserSignup=async(req,res,next)=>{
        otp:otp,
        otpExpiry:Date.now()+2*60*1000
     });
-    console.log("3")
+  
   let user=await User.register(newUser,password);
-  console.log("4")
-  transporter.verify((err,success)=>{
+  
+  await resend.emails.send({
 
-    if(err){
+    from:"onboarding@resend.dev",
  
-       console.log("MAIL ERROR");
-       console.log(err);
+    to:email,
  
-    }else{
+    subject:"OTP Verification",
  
-       console.log("MAIL SERVER READY");
- 
-    }
+    text:`Your OTP is ${otp}`
  
  });
- console.log("5")
-  const info = await transporter.sendMail({
-    from:`"Campus Bites support"<${ process.env.SMTP_USER}>`,
-    to: email,
-    subject: "Account Verification",
-    text:`Your otp for verification is: ${otp}`
-  });
-  console.log("6")
-  console.log(info);
 
   res.render("users/otpVerify",{email});
   
@@ -82,12 +64,7 @@ module.exports.getResetPassword=(req,res)=>{
 
 module.exports.postResetPassword=async(req,res,next)=>{
      let user=await User.findOne({email:req.body.email});
-    //  try {
-    //     await transporter.verify();
-    //     console.log("Server is ready to take our messages");
-    //   } catch (err) {
-    //     console.error("Verification failed:", err);
-    //   }
+    
      if(user){
       let token=crypto.randomBytes(32).toString("hex");
       user.resetToken=token;
@@ -96,12 +73,17 @@ module.exports.postResetPassword=async(req,res,next)=>{
 
       let resetUrl=`https://campus-bites-2-p5rw.onrender.com/user/setNewPassword?token=${token}`;
 
-      const info = await transporter.sendMail({
-        from:`"Campus Bites support"<${ process.env.SMTP_USER}>`,
-        to: user.email,
-        subject: "Password Reset",
-        text:`Click the link to reset password : ${resetUrl}`
-      });
+      await resend.emails.send({
+
+        from:"onboarding@resend.dev",
+     
+        to:user.email,
+     
+        subject:"OTP Verification",
+     
+        text:`Click onn the link to reset your password ${resetUrl}`
+     
+     });
     
      }
      return res.send("If mail exists , reset link has been sent");

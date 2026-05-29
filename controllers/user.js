@@ -19,9 +19,10 @@ module.exports.getUserSignup=(req,res)=>{
 }
 
 module.exports.postUserSignup=async(req,res,next)=>{
-  
+  console.log("1");
     let otp=Math.floor(1000+Math.random()*9000).toString();
     let {username,email,password,phoneNo}=req.body; 
+    console.log("2")
     let newUser=new User({
         username:username,
         email:email,
@@ -29,8 +30,9 @@ module.exports.postUserSignup=async(req,res,next)=>{
        otp:otp,
        otpExpiry:Date.now()+2*60*1000
     });
+    console.log("3")
   let user=await User.register(newUser,password);
-
+  console.log("4")
   transporter.verify((err,success)=>{
 
     if(err){
@@ -45,14 +47,14 @@ module.exports.postUserSignup=async(req,res,next)=>{
     }
  
  });
-
+ console.log("5")
   const info = await transporter.sendMail({
     from:`"Campus Bites support"<${ process.env.SMTP_USER}>`,
     to: email,
     subject: "Account Verification",
     text:`Your otp for verification is: ${otp}`
   });
-
+  console.log("6")
   console.log(info);
 
   res.render("users/otpVerify",{email});

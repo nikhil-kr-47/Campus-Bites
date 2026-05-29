@@ -130,6 +130,7 @@ module.exports.signupVerify=async(req,res,next)=>{
     await user.save();
     return res.redirect("/user/login");
   }else{
+    await User.deleteOne({email:email});
     req.flash("error","Invalid otp");
    return res.render("users/otpVerify",{email});
   }

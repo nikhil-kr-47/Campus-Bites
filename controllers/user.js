@@ -41,6 +41,8 @@ module.exports.postUserSignup=async(req,res,next)=>{
     text:`Your otp for verification is: ${otp}`
   });
 
+  console.log(info);
+
   res.render("users/otpVerify",{email});
   
 }

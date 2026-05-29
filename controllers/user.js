@@ -5,6 +5,7 @@ const nodemailer=require("nodemailer");
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
+    family:4,
     secure: false, // use STARTTLS (upgrade connection to TLS after connecting)
     auth: {
       user: process.env.SMTP_USER,

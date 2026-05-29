@@ -65,7 +65,7 @@ main().then(()=>{console.log("Connected to DB")}).catch(err=>console.log(err));
 
 const port=8080;
 
-app.listen(process.env.PORT || port,()=>{
+app.listen(port,()=>{
     console.log("App is listening");
 });
 

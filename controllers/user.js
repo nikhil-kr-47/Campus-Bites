@@ -1,18 +1,8 @@
 const User=require("../models/user");
 const crypto=require("crypto");
+const { Resend } = require("resend");
 
-const nodemailer = require("nodemailer");
-
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  family: 4,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
-  }
-});
+const resend =new Resend(process.env.RESEND_API_KEY);
 
 module.exports.getUserLogin=(req,res)=>{
     return res.render("users/login.ejs");
@@ -36,19 +26,21 @@ module.exports.postUserSignup=async(req,res,next)=>{
     });
   
   let user=await User.register(newUser,password);
-  console.log("1");
   try{
-  await transporter.sendMail({
-    from: `"Campus Bites Support" <${process.env.SMTP_USER}>`,
-    to: email,
-    subject: "OTP Verification",
-    text: `Your OTP is ${otp}`
-  });
-}catch(err){
-  res.send(err);
-}
+  await resend.emails.send({
 
-  console.log("2");
+    from:"onboarding@resend.dev",
+ 
+    to:email,
+ 
+    subject:"OTP Verification",
+ 
+    text:`Your OTP is ${otp}`
+ 
+ });
+}catch(err){
+  return res.status(500).send("Email sending failed");
+}
 
   res.render("users/otpVerify",{email});
   
@@ -84,12 +76,17 @@ module.exports.postResetPassword=async(req,res,next)=>{
 
       let resetUrl=`https://campus-bites-2-p5rw.onrender.com/user/setNewPassword?token=${token}`;
 
-      await transporter.sendMail({
-        from: `"Campus Bites Support" <${process.env.SMTP_USER}>`,
-        to: user.email,
-        subject: "Password resetting",
-        text: `Click on the link to reset your password ${resetUrl}`
-      });
+      await resend.emails.send({
+
+        from:"onboarding@resend.dev",
+     
+        to:user.email,
+     
+        subject:"Reset Password",
+     
+        text:`Click on the link to reset your password ${resetUrl}`
+     
+     });
     
      }
      return res.send("If mail exists , reset link has been sent");

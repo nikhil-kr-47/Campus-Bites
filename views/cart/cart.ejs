@@ -5,7 +5,7 @@
       <%for(let item of cart){%>
        <div class="card" style="width: 100vw !important;">
         <div class="card-left">
-          <img src="<%= item.image %>">
+          <img src="<%= item.image.url %>">
           <div>
             <h5><%= item.name %></h5>
             <p>&#8377;<%= item.price %></p>

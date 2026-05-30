@@ -27,13 +27,22 @@ module.exports.postUserSignup=async(req,res,next)=>{
     });
   
   let user=await User.register(newUser,password);
+console.log(otp);
 
 await sgMail.send({
   to: email,
-  from: "CampusBites <kumar47nikhil@gmail.com>", // or verified sender in SendGrid
-  subject: "OTP Verification",
-  text: `Your OTP is ${otp}`
+  from: "CampusBites <kumar47nikhil@gmail.com>",
+  subject: "Campus Bites - OTP Verification Code",
+  html: `
+  <h2>Campus Bites OTP Verification</h2>
+  <p>Your OTP is:</p>
+  <h1>${otp}</h1>
+  <p>This code will expire in 2 minutes.</p>
+  <br>
+  <small>If you did not request this, ignore this email.</small>
+`
 });
+
   res.render("users/otpVerify",{email});
   
 }
@@ -72,7 +81,14 @@ module.exports.postResetPassword=async(req,res,next)=>{
         to: user.email,
         from: "CampusBites <kumar47nikhil@gmail.com>", // or verified sender in SendGrid
         subject: "Password reset",
-        text: `Click on the link to reset password : ${resetUrl}`
+        html: `
+          <h2>Campus Bites Password Rsest</h2>
+          <p>Click here to reset password</p>
+          <a href=${resetUrl}>Click here</a>
+      
+          <br>
+          <small>If you did not request this, ignore this email.</small>`
+
       });
      
     

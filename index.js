@@ -109,6 +109,7 @@ app.use("/orders",orderRoute);
 
 
 app.use((err,req,res,next)=>{
-    let{message="Something went wrong"}=err;
-   res.render("error.ejs",{message});
+    // let{message="Something went wrong"}=err;
+//    res.render("error.ejs",{message});
+res.send(err);
 });

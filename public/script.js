@@ -81,10 +81,14 @@ slotOrderBtn.addEventListener("click",()=>{
 let newPassword=document.querySelector("#new-pass");
 let confirmNewPassword=document.querySelector("#confirm-new-pass");
 let passwordResetBtn=document.querySelector("#reset-password-btn");
-if(confirmNewPassword){
+if(newPassword && confirmNewPassword){
+
+  newPassword.addEventListener("input",()=>{
+    passwordResetBtn.disabled=newPassword.value!==confirmNewPassword.value || newPassword.value==="";
+  });
+
 confirmNewPassword.addEventListener("input",()=>{
-  if(newPassword && newPassword.value===confirmNewPassword.value) passwordResetBtn.disabled=false;
-  else passwordResetBtn.disabled=true;
+  passwordResetBtn.disabled=newPassword.value!==confirmNewPassword.value || newPassword.value==="";
 });
 }
 

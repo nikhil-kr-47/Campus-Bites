@@ -84,7 +84,7 @@ let passwordResetBtn=document.querySelector("#reset-password-btn");
 if(confirmNewPassword){
 confirmNewPassword.addEventListener("input",()=>{
   if(newPassword && newPassword.value===confirmNewPassword.value) passwordResetBtn.disabled=false;
-  else passwordResetBtn=true;
+  else passwordResetBtn.disabled=true;
 });
 }
 

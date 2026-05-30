@@ -2,9 +2,9 @@
 <body>
   
         <div class="login-container">
-            <form method="POST" action="/user/signup/otpVerify" class="needs-validation" novalidate>
-                <h2 class="offset-2">Otp Verification</h2><br>
-                <div class="offset-2 col-8">
+            <form method="POST" action="/user/signup/otpVerify" class="needs-validation offset-2" novalidate>
+                <h2 >Otp Verification</h2><br>
+                <div class=" col-8">
                     <label for="otp" class="form-label" style="font-size: larger;">Enter OTP</label>
                     <input type="text" class="form-control" id="otp" required name="otp" maxlength="4" minlength="4">
                     <div class="invalid-feedback">
@@ -12,12 +12,12 @@
                     </div>
                 </div>
                 <br>
-                <div class="offset-2 col-8">
+                <div class="col-8">
 
                     <input type="hidden" class="form-control"  name="email" value="<%= email %>">
                    
                 </div>
-                <button class="offset-2">Confirm</button>
+                <button >Confirm</button>
 
                 <p><b>Note : </b> Also check spam section if you can't find it in inbox.</p>
             </form>

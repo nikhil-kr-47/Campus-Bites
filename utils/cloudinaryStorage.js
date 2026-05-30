@@ -4,7 +4,7 @@ const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
       folder: "CampusBites",
-      allowed_formats:["png","jpg","jpeg"],
+     
      
     },
   });

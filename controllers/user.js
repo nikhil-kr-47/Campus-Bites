@@ -5,8 +5,8 @@ const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
+  port: 465,
+  secure: true,
   family: 4,
   auth: {
     user: process.env.SMTP_USER,
@@ -80,7 +80,7 @@ module.exports.postResetPassword=async(req,res,next)=>{
 
       await transporter.sendMail({
         from: `"Campus Bites Support" <${process.env.SMTP_USER}>`,
-        to: email,
+        to: user.email,
         subject: "Password resetting",
         text: `Click on the link to reset your password ${resetUrl}`
       });

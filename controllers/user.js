@@ -93,7 +93,9 @@ module.exports.postResetPassword=async(req,res,next)=>{
      
     
      }
-     return res.send("If mail exists , reset link has been sent.  Note : Check spam section if you can't find it in inbox");
+     req.flash("success","If mail exists , reset link has been sent.  Note : Check spam section if you can't find it in inbox");
+     return res.redierct("/user/login");
+    
 }
 
 module.exports.getSetNewPassword=(req,res)=>{

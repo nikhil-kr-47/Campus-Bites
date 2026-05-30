@@ -1,8 +1,9 @@
 const User=require("../models/user");
 const crypto=require("crypto");
-const { Resend } = require("resend");
 
-const resend =new Resend(process.env.RESEND_API_KEY);
+const sgMail = require("@sendgrid/mail");
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 module.exports.getUserLogin=(req,res)=>{
     return res.render("users/login.ejs");
@@ -26,22 +27,13 @@ module.exports.postUserSignup=async(req,res,next)=>{
     });
   
   let user=await User.register(newUser,password);
-  try{
-  await resend.emails.send({
 
-    from:"onboarding@resend.dev",
- 
-    to:email,
- 
-    subject:"OTP Verification",
- 
-    text:`Your OTP is ${otp}`
- 
- });
-}catch(err){
-  return res.status(500).send("Email sending failed");
-}
-
+await sgMail.send({
+  to: email,
+  from: "CampusBites <kumar47nikhil@gmail.com>", // or verified sender in SendGrid
+  subject: "OTP Verification",
+  text: `Your OTP is ${otp}`
+});
   res.render("users/otpVerify",{email});
   
 }
@@ -76,17 +68,13 @@ module.exports.postResetPassword=async(req,res,next)=>{
 
       let resetUrl=`https://campus-bites-2-p5rw.onrender.com/user/setNewPassword?token=${token}`;
 
-      await resend.emails.send({
-
-        from:"onboarding@resend.dev",
+      await sgMail.send({
+        to: user.email,
+        from: "CampusBites <kumar47nikhil@gmail.com>", // or verified sender in SendGrid
+        subject: "Password reset",
+        text: `Click on the link to reset password : ${resetUrl}`
+      });
      
-        to:user.email,
-     
-        subject:"Reset Password",
-     
-        text:`Click on the link to reset your password ${resetUrl}`
-     
-     });
     
      }
      return res.send("If mail exists , reset link has been sent");

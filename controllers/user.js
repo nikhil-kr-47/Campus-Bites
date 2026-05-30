@@ -37,12 +37,16 @@ module.exports.postUserSignup=async(req,res,next)=>{
   
   let user=await User.register(newUser,password);
   console.log("1");
+  try{
   await transporter.sendMail({
     from: `"Campus Bites Support" <${process.env.SMTP_USER}>`,
     to: email,
     subject: "OTP Verification",
     text: `Your OTP is ${otp}`
   });
+}catch(err){
+  res.send(err);
+}
 
   console.log("2");
 

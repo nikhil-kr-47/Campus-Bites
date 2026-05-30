@@ -1,5 +1,7 @@
 function genTimeSlots(){
-    let now=new Date();
+    let now = new Date(
+        new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+      );
     let min=now.getMinutes();
     let st=min>30 ? now.getHours()+1 : now.getHours(),end=20;
     let slots=[];
